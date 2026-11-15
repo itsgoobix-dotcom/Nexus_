@@ -74,6 +74,7 @@ class EditorActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ScriptStore.loadAll(this)
         window.statusBarColor = bg
         window.navigationBarColor = bg
 
