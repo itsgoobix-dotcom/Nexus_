@@ -18,3 +18,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+dependencies {
+    implementation("org.mozilla:rhino:1.7.14")
+}
