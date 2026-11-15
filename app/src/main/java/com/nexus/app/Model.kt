@@ -19,7 +19,9 @@ class EffectDef(
     val params: List<Param> = emptyList(),
     val implemented: Boolean = false,
     val plugin: String? = null
-)
+) {
+    var matrixFn: ((FloatArray) -> FloatArray)? = null
+}
 
 class Effect(val def: EffectDef) {
     var enabled = true
