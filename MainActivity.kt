@@ -95,7 +95,7 @@ class MainActivity : Activity() {
         ).apply { topMargin = dp(16) })
 
         val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
-        row.addView(shortcut("Effects", "Built-in effects and plugins") { soon("Effects") })
+        row.addView(shortcut("Scripts", "Write your own effects") { startActivity(Intent(this, ScriptActivity::class.java)) })
         row.addView(shortcut("Projects", "Open and organize") { soon("Projects") })
         content.addView(row, LinearLayout.LayoutParams(
             LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT
@@ -128,7 +128,7 @@ class MainActivity : Activity() {
                 setMargins(dp(6), 0, dp(6), 0)
             }
         })
-        bar.addView(tab("✦", "Effects", false) { soon("Effects") })
+        bar.addView(tab("✦", "Scripts", false) { startActivity(Intent(this, ScriptActivity::class.java)) })
         bar.addView(tab("☻", "Profile", false) { soon("Profile") })
 
         val root = FrameLayout(this).apply { setBackgroundColor(bg) }
