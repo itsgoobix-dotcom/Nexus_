@@ -70,6 +70,10 @@ class MainActivity : Activity() {
         }
 
         content.addView(tv("Nexus", 24f, accent, true))
+        content.addView(ImageView(this).apply {
+            setImageResource(R.drawable.nexus_banner)
+            scaleType = ImageView.ScaleType.CENTER_CROP
+        }, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, dp(160)).apply { topMargin = dp(12) })
 
         val welcome = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
