@@ -36,6 +36,8 @@ object Registry {
         val list = categories.getOrPut(d.category) { mutableListOf() }
         if (list.none { it.name == d.name }) list.add(d)
     }
+        fun find(id: String): EffectDef? =
+        categories.values.flatten().firstOrNull { it.id == id }
 
     private fun planned(cat: String, vararg names: String) {
         for (n in names) register(EffectDef("$cat:$n", n, cat))
