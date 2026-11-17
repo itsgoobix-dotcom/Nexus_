@@ -290,31 +290,7 @@ class EditorActivity : Activity() {
     }
 
     private fun showCategories(l: Layer) {
-        val names = Registry.categories.keys.toList()
-        val labels = names.map { "$it  (${Registry.categories[it]!!.size})" }.toTypedArray()
-        AlertDialog.Builder(this).setTitle("Effects")
-            .setItems(labels) { _, i -> showEffects(l, names[i]) }
-            .show()
-    }
-
-    private fun showEffects(l: Layer, cat: String) {
-        val defs = Registry.categories[cat] ?: return
-        val labels = defs.map { d ->
-            d.name + (if (d.plugin != null) "  [plugin]" else "") + (if (d.implemented) "" else "  · planned")
-        }.toTypedArray()
-        AlertDialog.Builder(this).setTitle(cat)
-            .setItems(labels) { _, i ->
-                val d = defs[i]
-                if (!d.implemented) {
-                    toast("${d.name} is planned, not built yet")
-                } else {
-                    l.effects.add(Effect(d))
-                    mode = 1
-                    rebuildTools()
-                    rebuildPanel()
-                    refresh()
-                }
-            }.show()
+        startActivityForResult(Intent(this, EffectsActivity::class.java), 2)
     }
 
     private fun showAdd() {
@@ -339,8 +315,20 @@ class EditorActivity : Activity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val uri = data?.data
-        if (requestCode == 1 && resultCode == RESULT_OK && uri != null) loadImage(uri)
+        if (resultCode != RESULT_OK) return
+        if (requestCode == 1) {
+            val uri = data?.data
+            if (uri != null) loadImage(uri)
+        } else if (requestCode == 2) {
+            val id = data?.getStringExtra("effect_id") ?: return
+            val d = Registry.find(id) ?: return
+            val l = project.selected ?: return
+            l.effects.add(Effect(d))
+            mode = 1
+            rebuildTools()
+            rebuildPanel()
+            refresh()
+        }
     }
 
     private fun loadImage(uri: Uri) {
