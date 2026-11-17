@@ -51,7 +51,7 @@ object Registry {
         )) categories[c] = mutableListOf()
 
         // Implemented (real rendering)
-        register(EffectDef("blur_box", "Fast Box Blur", "Blur",
+                register(EffectDef("blur_box", "Fast Box Blur", "Blur",
             listOf(Param("Amount", 1f, 40f, 8f)), true))
         register(EffectDef("bright_contrast", "Brightness & Contrast", "Color Correction",
             listOf(Param("Brightness", -100f, 100f, 0f), Param("Contrast", -100f, 100f, 0f)), true))
@@ -62,7 +62,11 @@ object Registry {
         register(EffectDef("bw", "Black & White", "Color Correction", emptyList(), true))
         register(EffectDef("rgb_split", "RGB Split", "Glitch & RGB",
             listOf(Param("Distance", 0f, 80f, 20f)), true))
-
+        register(EffectDef("blur_gauss", "Gaussian Blur", "Blur",
+            listOf(Param("Amount", 0f, 100f, 20f)), true))
+        register(EffectDef("glow", "Glow", "Glow & Lighting",
+            listOf(Param("Intensity", 0f, 100f, 60f), Param("Radius", 1f, 100f, 30f),
+                Param("Threshold", 0f, 255f, 140f)), true))
         // Planned (shown as unavailable)
         planned("Blur", "Gaussian Blur", "Fast Box Blur", "Directional Blur", "Radial Blur", "Motion Blur",
             "Camera Lens Blur", "Compound Blur", "Bilateral Blur", "Channel Blur", "Smart Blur", "Zoom Blur", "Bokeh Blur")
